@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Clock</title>
+    <style>
+        body { text-align: center; font-family: Arial, sans-serif; background-color: black; color: white; }
+        #clock { font-size: 3em; margin-top: 20%; color: limegreen; text-shadow: 0px 0px 10px limegreen; }
+        button { margin: 10px; padding: 10px; font-size: 1em; }
+    </style>
+</head>
+<body>
+    <div id="clock"></div>
+    <button onclick="setHour()">Set Hour</button>
+    <button onclick="setMinute()">Set Minute</button>
+    <script>
+        function updateClock() {
+            let now = new Date();
+            let hours = now.getHours() % 12 || 12;
+            let minutes = now.getMinutes().toString().padStart(2, '0');
+            let seconds = now.getSeconds().toString().padStart(2, '0');
+            let ampm = now.getHours() >= 12 ? 'PM' : 'AM';
+            document.getElementById("clock").innerText = `${hours}:${minutes}:${seconds} ${ampm}`;
+        }
+        function setHour() {
+            let hour = prompt("Enter hour (1-12):");
+            let now = new Date();
+            now.setHours(hour);
+            updateClock();
+        }
+        function setMinute() {
+            let minute = prompt("Enter minutes (0-59):");
+            let now = new Date();
+            now.setMinutes(minute);
+            updateClock();
+        }
+        setInterval(updateClock, 1000);
+        updateClock();
+    </script>
+</body>
+</html>
